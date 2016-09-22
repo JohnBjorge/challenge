@@ -5,16 +5,19 @@ define(function(require) {
   var T = Ember.Handlebars.compile('\
     <h4>Posts</h4> \
     <table class="table table-striped table-hover"> \
-      <thead><tr><th></th><th>Date</th><th>Picture</th><th>Message</th><th>Link</th><th>Source</th></tr></thead> \
+      <thead><tr><th></th><th>Date</th><th>Picture</th><th>Message</th><th>Link</th></tr></thead> \
       <tbody> \
         {{#each post in model}} \
           <tr style="cursor:pointer;" {{action showPost post}}> \
             <td><img {{bindAttr src=post.icon}}></td> \
             <td>{{date post.created_time}}</td> \
             <td><img class="pic-thumbnail" {{bindAttr src=post.picture}}></td> \
-            <td>{{post.message}}</td> \
+            {{#if post.message}} \
+              <td>{{post.message}}</td> \
+            {{else}} \
+              <td>{{post.story}}</td> \
+            {{/if}} \
             <td><a {{bindAttr href=post.link}}>{{post.name}}</a></td> \
-            <td><a {{bindAttr href=post.source}}>{{post.source}}</a></td> \
           </tr> \
         {{/each}} \
       </tbody> \
@@ -25,3 +28,4 @@ define(function(require) {
     template: T
   });
 });
+

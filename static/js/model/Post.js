@@ -31,6 +31,9 @@ define(function(require) {
         },
         created_time: {
           dataType: DT.Date
+        },
+        story: {
+          dataType: DT.String
         }
       }
     });
@@ -41,7 +44,7 @@ define(function(require) {
       _VOXSUPMETHOD_: 'EDGE'
     };
 
-    q = breeze.EntityQuery.from('me/posts').withParameters(p).toType('Post');
+    q = breeze.EntityQuery.from('me/posts?fields=name,message,created_time,link,id,story,icon,type,picture').withParameters(p).toType('Post');
     return manager.executeQuery(q);
   };
 
